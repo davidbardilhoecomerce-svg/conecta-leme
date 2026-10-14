@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Conecta Leme NFC">
+<meta property="og:description" content="Plaquinhas NFC com QR Code para sua empresa receber mais avaliações no Google. Aproximou, avaliou, conectou.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A1A52">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%232D63F0' d='M24 3C15.4 3 8.6 9.7 8.6 18.2 8.6 29.4 24 45 24 45s15.4-15.6 15.4-26.8C39.4 9.7 32.6 3 24 3Z'/%3E%3Cpath fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' d='M31.2 13.6a9.4 9.4 0 1 0 0 10.2'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Conecta Leme NFC</title>
+<meta name="description" content="Plaquinhas NFC com QR Code para sua empresa receber mais avaliações no Google. Aproximou, avaliou, conectou. Leme – SP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700&display=swap">
+<style>
+/* Layout: navy "vitrine" hero com a plaquinha real em destaque e uma demo de toque; depois seções claras em coluna única de leitura, com faixas de largura total para o passo a passo e o CTA final. */
+:root{
+  --paper:#F3F5FB;
+  --surface:#FFFFFF;
+  --ink:#0C1633;
+  --muted:#4B5677;
+  --line:#DCE2F0;
+  --royal:#1F4FD6;
+  --royal-ink:#FFFFFF;
+  --navy:#0A1A52;
+  --navy-2:#122A7A;
+  --gold:#B8862A;
+  --gold-bright:#E6BC5C;
+  --on-navy:#FFFFFF;
+  --on-navy-muted:#B9C6EE;
+  --wa:#128C4B;
+  /* cores da plaquinha física: iguais nos dois temas, pois reproduzem o produto */
+  --pl-blue:#1D3FAE;
+  --pl-white:#FFFFFF;
+  --pl-ink:#1A1A1A;
+  --g-blue:#4285F4; --g-red:#EA4335; --g-yellow:#FBBC05; --g-green:#34A853;
+
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --step--1:clamp(.82rem,.8rem + .1vw,.88rem);
+  --step-0:clamp(1rem,.97rem + .15vw,1.08rem);
+  --step-1:clamp(1.2rem,1.1rem + .4vw,1.4rem);
+  --step-2:clamp(1.5rem,1.3rem + .9vw,2rem);
+  --step-3:clamp(2rem,1.6rem + 1.8vw,3rem);
+  --step-4:clamp(2.5rem,1.8rem + 3.4vw,4.6rem);
+
+  --wrap:1120px;
+  --gutter:clamp(16px,4vw,40px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#070C22; --surface:#0E1737; --ink:#E9EEFF; --muted:#9DAAD0; --line:#1D2A57;
+    --royal:#5E87FF; --royal-ink:#06102E; --navy:#0B1847; --navy-2:#16307F;
+    --gold:#E2B551; --gold-bright:#F0CC74; --on-navy:#FFFFFF; --on-navy-muted:#B9C6EE; --wa:#25B866;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#070C22; --surface:#0E1737; --ink:#E9EEFF; --muted:#9DAAD0; --line:#1D2A57;
+  --royal:#5E87FF; --royal-ink:#06102E; --navy:#0B1847; --navy-2:#16307F;
+  --gold:#E2B551; --gold-bright:#F0CC74; --on-navy:#FFFFFF; --on-navy-muted:#B9C6EE; --wa:#25B866;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:var(--step-0);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.015em}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{font-size:var(--step--1);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+:focus-visible{outline:3px solid var(--gold-bright);outline-offset:3px;border-radius:6px}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;gap:.6em;font:700 var(--step-0)/1 var(--f-body);text-decoration:none;padding:.95em 1.35em;border-radius:999px;border:0;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, background .15s ease}
+.btn svg{width:1.2em;height:1.2em;flex:none}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 8px 24px -10px var(--wa)}
+.btn-wa:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--on-navy);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--gold-bright)}
+
+/* Cabeçalho */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--navy);color:var(--on-navy);border-bottom:1px solid rgba(255,255,255,.08)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:38px;height:38px;flex:none}
+.brand-name{font-family:var(--f-display);font-weight:800;font-size:1.15rem;line-height:1;letter-spacing:-.01em}
+.brand-name small{display:block;font-family:var(--f-body);font-weight:700;font-size:.62rem;letter-spacing:.32em;color:var(--gold-bright);margin-top:4px}
+.top nav{display:flex;gap:22px;font-weight:500;font-size:.95rem}
+.top nav a{text-decoration:none;color:var(--on-navy-muted)}
+.top nav a:hover{color:var(--on-navy)}
+.top .btn{padding:.7em 1.05em;font-size:.92rem}
+@media (max-width:860px){.top nav{display:none}}
+@media (max-width:420px){.top .btn span{display:none}.top .btn{padding:.7em}}
+
+/* Hero */
+.hero{background:
+  radial-gradient(60% 80% at 85% 30%, var(--navy-2) 0%, transparent 70%),
+  var(--navy);color:var(--on-navy);overflow:hidden;position:relative}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-bright),transparent)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(48px,7vw,96px)}
+.hero-copy{min-width:0;display:flex;flex-direction:column;gap:22px}
+.hero h1{font-size:var(--step-4);font-weight:800}
+.hero h1 .gold{color:var(--gold-bright)}
+.hero .lede{font-size:var(--step-1);color:var(--on-navy-muted);max-width:34ch;line-height:1.5}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-facts{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:var(--step--1);color:var(--on-navy-muted);list-style:none;padding:0;margin:4px 0 0}
+.hero-facts li{display:flex;align-items:center;gap:7px}
+.hero-facts svg{width:15px;height:15px;color:var(--gold-bright)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero .lede{max-width:none}}
+
+/* Palco: plaquinha + celular */
+.stage{position:relative;min-width:0;display:grid;place-items:center;padding:12px 0 8px}
+.stage-inner{position:relative;width:min(100%,420px);aspect-ratio:1/1.05;max-width:100%}
+.plaque{position:absolute;left:4%;top:4%;width:64%;aspect-ratio:3/4;border-radius:7% / 5.5%;background:var(--pl-white);overflow:hidden;
+  box-shadow:0 40px 60px -30px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.12);transform:rotate(-5deg);display:flex;flex-direction:column;cursor:pointer;border:0;padding:0;font:inherit;color:var(--pl-ink);text-align:center}
+.plaque-top{background:var(--pl-blue);color:#fff;padding:9% 8% 13%;display:flex;flex-direction:column;align-items:center;gap:6%;position:relative}
+.plaque-stars{color:#F6B93B;letter-spacing:.18em;font-size:clamp(.7rem,2.6vw,1rem);line-height:1}
+.plaque-title{font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(.62rem,2.3vw,.9rem);line-height:1.2;letter-spacing:.02em}
+.plaque-wave{height:7%;margin-top:-7%;background:linear-gradient(90deg,var(--g-blue),var(--g-red) 35%,var(--g-yellow) 65%,var(--g-green));clip-path:polygon(0 60%,100% 0,100% 40%,0 100%)}
+.plaque-g{width:17%;aspect-ratio:1;margin:-6% auto 0;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.18);position:relative;z-index:1}
+.plaque-g svg{width:62%;height:62%}
+.plaque-body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:6%;padding:6% 8% 8%}
+.plaque-box{border:2px solid #222;border-radius:10%/8%;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:6% 4%;font-size:clamp(.5rem,1.7vw,.7rem);font-weight:500}
+.plaque-box svg{width:76%;height:auto}
+.plaque-bars{display:grid;grid-template-columns:repeat(4,1fr);height:5%}
+.plaque-bars span:nth-child(1){background:var(--g-blue)}
+.plaque-bars span:nth-child(2){background:var(--g-green)}
+.plaque-bars span:nth-child(3){background:var(--g-yellow)}
+.plaque-bars span:nth-child(4){background:var(--g-red)}
+
+.phone{position:absolute;right:2%;bottom:2%;width:42%;aspect-ratio:9/18.5;border-radius:16%/8%;background:#0B0F1C;padding:3.2%;
+  box-shadow:0 30px 50px -20px rgba(0,0,0,.7),inset 0 0 0 1.5px rgba(255,255,255,.18);transform:rotate(8deg);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.phone-screen{width:100%;height:100%;border-radius:12%/6%;background:#fff;overflow:hidden;display:flex;flex-direction:column;color:#202124;font-size:clamp(.5rem,1.6vw,.68rem)}
+.ps-bar{background:#F1F3F4;padding:12% 8% 6%;display:flex;align-items:center;gap:6%;font-weight:700}
+.ps-bar i{width:14%;aspect-ratio:1;border-radius:50%;background:var(--pl-blue);display:block}
+.ps-body{padding:8%;display:flex;flex-direction:column;gap:8%;flex:1}
+.ps-body b{font-size:1.15em;line-height:1.25}
+.ps-stars{display:flex;gap:4%}
+.ps-stars svg{width:18%;height:auto;color:#DADCE0;transition:color .25s ease}
+.ps-stars.on svg{color:#F6B93B}
+.ps-stars.on svg:nth-child(2){transition-delay:.12s}
+.ps-stars.on svg:nth-child(3){transition-delay:.24s}
+.ps-stars.on svg:nth-child(4){transition-delay:.36s}
+.ps-stars.on svg:nth-child(5){transition-delay:.48s}
+.ps-line{height:5%;border-radius:4px;background:#ECEEF1}
+.ps-line.short{width:60%}
+.ps-btn{margin-top:auto;background:var(--g-blue);color:#fff;border-radius:999px;text-align:center;padding:7% 0;font-weight:700}
+.waves{position:absolute;left:47%;top:44%;width:30%;aspect-ratio:1;pointer-events:none}
+.waves span{position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold-bright);opacity:0;transform:scale(.3)}
+.stage.tap .phone{transform:rotate(-3deg) translate(-38%,-30%)}
+.stage.tap .waves span{animation:ping 1.4s ease-out .5s 2}
+.stage.tap .waves span:nth-child(2){animation-delay:.8s}
+.stage.tap .waves span:nth-child(3){animation-delay:1.1s}
+@keyframes ping{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.4)}}
+.stage-hint{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);font-size:var(--step--1);color:var(--on-navy-muted);white-space:nowrap;display:flex;gap:8px;align-items:center}
+.stage-hint button{font:inherit;font-weight:700;color:var(--navy);background:var(--gold-bright);border:0;border-radius:999px;padding:.45em .95em;cursor:pointer}
+@media (prefers-reduced-motion: reduce){.phone{transition:none}.stage.tap .waves span{animation:none}}
+
+/* Faixa de garantias */
+.strip{background:var(--surface);border-bottom:1px solid var(--line)}
+.strip ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.strip li{padding:22px 18px;display:flex;flex-direction:column;gap:2px;border-left:1px solid var(--line);min-width:0}
+.strip li:first-child{border-left:0;padding-left:0}
+.strip b{font-family:var(--f-display);font-size:var(--step-1);color:var(--royal)}
+.strip span{font-size:var(--step--1);color:var(--muted)}
+@media (max-width:760px){.strip ul{grid-template-columns:1fr 1fr}.strip li{border-left:0;padding-left:0;border-top:1px solid var(--line)}.strip li:nth-child(-n+2){border-top:0}}
+
+/* Seções */
+section{scroll-margin-top:72px}
+.sec{padding-block:clamp(64px,9vw,112px)}
+.sec-head{display:flex;flex-direction:column;gap:12px;max-width:640px;margin-bottom:clamp(32px,5vw,56px)}
+.sec-head h2{font-size:var(--step-3);font-weight:800}
+.sec-head p{color:var(--muted);font-size:var(--step-1);line-height:1.5}
+
+/* Como funciona */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,32px);counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:10px;padding-top:22px;border-top:2px solid var(--ink);min-width:0}
+.steps li::before{content:"Passo " counter(s);font-size:var(--step--1);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.steps h3{font-size:var(--step-2);font-weight:800}
+.steps p{color:var(--muted)}
+.steps .time{font-family:var(--f-display);font-weight:600;color:var(--royal);font-size:var(--step-0);margin-top:auto}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+/* Benefícios */
+.benefits{background:var(--surface);border-block:1px solid var(--line)}
+.ben-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,80px);align-items:start}
+.ben-quote{font-family:var(--f-display);font-weight:800;font-size:var(--step-3);line-height:1.12;letter-spacing:-.02em}
+.ben-quote em{font-style:normal;color:var(--royal)}
+.ben-quote + p{margin-top:20px;color:var(--muted);font-size:var(--step-1);max-width:46ch;line-height:1.5}
+.ben-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.ben-list li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+.ben-list li:last-child{border-bottom:1px solid var(--line)}
+.ben-ico{width:44px;height:44px;border-radius:12px;background:var(--paper);display:grid;place-items:center;color:var(--royal)}
+.ben-ico svg{width:22px;height:22px}
+.ben-list h3{font-size:var(--step-1);font-weight:800;margin-bottom:4px}
+.ben-list p{color:var(--muted)}
+@media (max-width:860px){.ben-grid{grid-template-columns:1fr}}
+
+/* Para quem */
+.who-chips{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0;padding:0}
+.who-chips li{display:flex;align-items:center;gap:10px;padding:12px 18px 12px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:500}
+.who-chips svg{width:20px;height:20px;color:var(--royal);flex:none}
+.who-chips li.any{background:var(--royal);color:var(--royal-ink);border-color:var(--royal)}
+.who-chips li.any svg{color:var(--royal-ink)}
+
+/* Produto */
+.product{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,80px);align-items:center}
+.spec{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.spec li{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start}
+.spec svg{width:22px;height:22px;color:var(--gold);margin-top:2px}
+.spec b{display:block}
+.spec span{color:var(--muted)}
+.medal{position:relative;max-width:360px;width:100%;margin-inline:auto;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 40%,var(--navy-2),var(--navy) 70%);display:grid;place-items:center;box-shadow:inset 0 0 0 10px var(--gold),inset 0 0 0 13px var(--navy),inset 0 0 0 15px var(--gold-bright),0 30px 60px -30px rgba(10,26,82,.6)}
+.medal-in{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--on-navy);text-align:center}
+.medal-in svg{width:34%;height:auto}
+.medal-name{font-family:var(--f-display);font-weight:800;font-size:clamp(1.4rem,4vw,2rem);line-height:1}
+.medal-sub{font-weight:700;letter-spacing:.5em;color:var(--gold-bright);font-size:.85rem;display:flex;align-items:center;gap:10px}
+.medal-sub::before,.medal-sub::after{content:"";width:28px;height:2px;background:var(--royal);display:block}
+.medal-stars{color:var(--gold-bright);letter-spacing:.3em;font-size:.9rem}
+@media (max-width:860px){.product{grid-template-columns:1fr}.medal{max-width:280px}}
+
+/* FAQ */
+.faq{max-width:760px}
+.faq details{border-top:1px solid var(--line);padding:4px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 0;font-weight:700;font-size:var(--step-1)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-display);font-size:1.6rem;line-height:1;color:var(--royal);transition:transform .2s ease;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:62ch}
+
+/* CTA final */
+.cta{background:var(--navy);color:var(--on-navy);position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:2px solid rgba(230,188,92,.25);box-shadow:0 0 0 60px rgba(230,188,92,.06),0 0 0 120px rgba(230,188,92,.04)}
+.cta .wrap{position:relative;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;padding-block:clamp(64px,9vw,104px)}
+.cta h2{font-size:var(--step-3);font-weight:800}
+.cta h2 span{color:var(--gold-bright)}
+.cta-copy{display:flex;flex-direction:column;gap:18px;min-width:0}
+.cta-copy p{color:var(--on-navy-muted);font-size:var(--step-1);max-width:40ch;line-height:1.5}
+.contact{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.contact-row{display:flex;flex-direction:column;gap:4px}
+.contact-row small{font-size:var(--step--1);letter-spacing:.12em;text-transform:uppercase;color:var(--on-navy-muted);font-weight:700}
+.contact-num{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.contact-num output{font-family:var(--f-display);font-weight:600;font-size:var(--step-2);font-variant-numeric:tabular-nums;user-select:all}
+.copy{font:700 .85rem/1 var(--f-body);background:transparent;color:var(--gold-bright);border:1.5px solid rgba(230,188,92,.5);border-radius:999px;padding:.55em .9em;cursor:pointer}
+.copy:hover{border-color:var(--gold-bright)}
+.contact a.ig{color:var(--on-navy);font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--gold-bright)}
+.contact .btn{justify-content:center}
+@media (max-width:860px){.cta .wrap{grid-template-columns:1fr}}
+
+footer{background:var(--navy);color:var(--on-navy-muted);border-top:1px solid rgba(255,255,255,.08);font-size:var(--step--1)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;padding-block:24px}
+footer b{color:var(--on-navy);font-family:var(--f-display)}
+
+/* Botão flutuante do WhatsApp */
+.float-wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;width:56px;height:56px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.45)}
+.float-wa svg{width:28px;height:28px}
+</style>
+
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.5-.3Z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9L12 2.8Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 48 48">
+      <path fill="#2D63F0" d="M24 3C15.4 3 8.6 9.7 8.6 18.2 8.6 29.4 24 45 24 45s15.4-15.6 15.4-26.8C39.4 9.7 32.6 3 24 3Z"/>
+      <path fill="#1A3FB8" d="M24 3c8.6 0 15.4 6.7 15.4 15.2 0 11.2-15.4 26.8-15.4 26.8V3Z" opacity=".55"/>
+      <path fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" d="M31.2 13.6a9.4 9.4 0 1 0 0 10.2"/>
+      <rect x="19.4" y="19" width="2.6" height="4.6" rx="1" fill="#fff"/>
+      <rect x="23.2" y="16.4" width="2.6" height="7.2" rx="1" fill="#fff"/>
+      <rect x="27" y="13.6" width="2.6" height="10" rx="1" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Conecta Leme NFC, início">
+      <svg><use href="#i-logo"/></svg>
+      <span class="brand-name">Conecta Leme<small>NFC</small></span>
+    </a>
+    <nav aria-label="Seções">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#beneficios">Benefícios</a>
+      <a href="#produto">A plaquinha</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a class="btn btn-wa" href="https://wa.me/5519992545031?text=Ol%C3%A1%2C%20quero%20comprar%20minha%20plaquinha%20NFC%20(Conecta%20Leme)" target="_blank" rel="noopener">
+      <svg><use href="#i-wa"/></svg><span>Pedir a minha</span>
+    </a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Placas NFC para avaliações no Google</span>
+        <h1>Aproximou. Avaliou. <span class="gold">Conectou.</span></h1>
+        <p class="lede">Uma plaquinha no balcão leva o seu cliente direto para a página de avaliação da sua empresa no Google. Ele aproxima o celular e deixa as estrelas em poucos segundos.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-wa" href="https://wa.me/5519992545031?text=Ol%C3%A1%2C%20quero%20comprar%20minha%20plaquinha%20NFC%20(Conecta%20Leme)" target="_blank" rel="noopener">
+            <svg><use href="#i-wa"/></svg>Pedir minha plaquinha
+          </a>
+          <a class="btn btn-ghost" href="#como-funciona">Ver como funciona</a>
+        </div>
+        <ul class="hero-facts">
+          <li><svg><use href="#i-check"/></svg>Sem aplicativo</li>
+          <li><svg><use href="#i-check"/></svg>NFC + QR Code</li>
+          <li><svg><use href="#i-check"/></svg>Personalizada para sua empresa</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="stage-inner">
+          <button class="plaque" type="button" id="plaque" aria-label="Plaquinha Conecta Leme: toque para ver a demonstração">
+            <div class="plaque-top">
+              <div class="plaque-stars" aria-hidden="true">★★★★★</div>
+              <div class="plaque-title">Nós adoraríamos a sua avaliação no Google</div>
+            </div>
+            <div class="plaque-wave" aria-hidden="true"></div>
+            <div class="plaque-g" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9l3.3-2.5Z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6 12 6Z"/></svg>
+            </div>
+            <div class="plaque-body" aria-hidden="true">
+              <div class="plaque-box">Escaneie
+                <svg viewBox="0 0 21 21" shape-rendering="crispEdges"><path fill="#111" d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zm1 1v5h5V1zm1 1h3v3h-3zM0 14h7v7H0zm1 1v5h5v-5zm1 1h3v3H2zM8 0h2v2H8zm3 1h2v3h-2zM8 3h2v2H8zm0 3h3v2H8zm4 2h2v2h-2zM0 8h2v2H0zm3 0h3v1H3zm4 1h3v2H7zm7-1h2v3h-2zm3 0h4v2h-4zM1 11h3v2H1zm4 1h2v1H5zm6 0h2v2h-2zm4 0h2v1h-2zm3 1h3v2h-3zM8 13h2v3H8zm6 1h3v2h-3zm-3 2h2v2h-2zm7 0h1v3h-1zm-9 2h2v3H9zm6 0h2v2h-2zm-3 2h2v1h-2zm7 0h2v1h-2z"/></svg>
+              </div>
+              <div class="plaque-box">Aproxime
+                <svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round"><rect x="13" y="7" width="14" height="26" rx="3"/><text x="20" y="22.5" text-anchor="middle" font-size="5.4" font-weight="700" fill="#111" stroke="none" font-family="Arial, sans-serif">NFC</text><path d="M9 14a9 9 0 0 0 0 12M6 11a14 14 0 0 0 0 18M31 14a9 9 0 0 1 0 12M34 11a14 14 0 0 1 0 18"/></svg>
+              </div>
+            </div>
+            <div class="plaque-bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          </button>
+
+          <div class="waves" aria-hidden="true"><span></span><span></span><span></span></div>
+
+          <div class="phone" aria-hidden="true">
+            <div class="phone-screen">
+              <div class="ps-bar"><i></i>Sua Empresa</div>
+              <div class="ps-body">
+                <b>Avalie sua experiência</b>
+                <div class="ps-stars" id="stars">
+                  <svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg>
+                </div>
+                <div class="ps-line"></div>
+                <div class="ps-line short"></div>
+                <div class="ps-btn">Postar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stage-hint"><button type="button" id="replay">Simular o toque</button></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <ul>
+        <li><b>1 toque</b><span>e o cliente já está na sua avaliação</span></li>
+        <li><b>0 apps</b><span>o celular lê a plaquinha sozinho</span></li>
+        <li><b>NFC + QR</b><span>funciona até em celular sem NFC</span></li>
+        <li><b>Leme – SP</b><span>atendimento local, direto no WhatsApp</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="sec" id="como-funciona">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Como funciona</span>
+        <h2>Do balcão ao Google em poucos segundos</h2>
+        <p>Pedir avaliação costuma morrer no "depois eu faço". Com a plaquinha, o cliente avalia ali mesmo, enquanto a boa experiência ainda está fresca.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>O cliente aproxima o celular</h3>
+          <p>Basta encostar o celular na plaquinha. Se o aparelho não tiver NFC, ele aponta a câmera para o QR Code.</p>
+          <span class="time">Um toque</span>
+        </li>
+        <li>
+          <h3>A sua página de avaliação abre</h3>
+          <p>A plaquinha é configurada com o link do perfil da sua empresa no Google. Não precisa procurar nada nem baixar aplicativo.</p>
+          <span class="time">Abre na hora</span>
+        </li>
+        <li>
+          <h3>Ele deixa as estrelas</h3>
+          <p>O cliente escolhe a nota, escreve um comentário se quiser e publica. Sua reputação cresce a cada atendimento.</p>
+          <span class="time">Poucos segundos</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec benefits" id="beneficios">
+    <div class="wrap ben-grid">
+      <div>
+        <span class="eyebrow">Por que importa</span>
+        <p class="ben-quote" style="margin-top:12px">Seu próximo cliente pode escolher sua empresa <em>pelas avaliações no Google.</em></p>
+        <p>Hoje a reputação digital faz toda a diferença. Quem pesquisa um serviço compara estrelas e comentários antes de decidir. A plaquinha ajuda sua empresa a ser encontrada, lembrada e bem avaliada.</p>
+      </div>
+      <ul class="ben-list">
+        <li>
+          <span class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M9 21l-1-6 6 1-5 5ZM14 16l6 6"/><path d="M9.5 9.5 21 13l-5 2-2 5-4.5-10.5Z"/></svg></span>
+          <div><h3>Mais praticidade no atendimento</h3><p>Sua equipe não precisa explicar onde avaliar. É só apontar para a plaquinha.</p></div>
+        </li>
+        <li>
+          <span class="ben-ico"><svg><use href="#i-star"/></svg></span>
+          <div><h3>Mais oportunidades de receber avaliações</h3><p>Cada cliente satisfeito vira uma chance real de avaliação, sem depender da memória dele.</p></div>
+        </li>
+        <li>
+          <span class="ben-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+          <div><h3>Mais credibilidade e visibilidade</h3><p>Mais avaliações fortalecem a reputação do seu negócio e ajudam novos clientes a confiar em você.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="para-quem">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Para quem é</span>
+        <h2>Do pequeno empreendedor à grande empresa</h2>
+        <p>Se o seu negócio tem perfil no Google e atende clientes, a plaquinha cabe no seu balcão, na mesa ou na parede.</p>
+      </div>
+      <ul class="who-chips">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 9h16l-1 11H5L4 9ZM8 9V7a4 4 0 0 1 8 0v2"/></svg>Lojas</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/><rect x="3" y="3" width="18" height="18" rx="4"/></svg>Clínicas</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg>Oficinas</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 3v8a2 2 0 0 0 2 2v8M5 3v5M9 3v5M17 21V3c-2 1-3 4-3 7h3"/></svg>Restaurantes</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.2 15.8 20 4M15.8 15.8 4 4"/></svg>Salões e barbearias</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a6 6 0 0 0-6 6c0 2 1 3.5 2.5 4.5V17h7v-3.5C17 12.5 18 11 18 9a6 6 0 0 0-6-6ZM9.5 21h5"/></svg>Prestadores de serviço</li>
+        <li class="any"><svg><use href="#i-check"/></svg>Qualquer negócio com perfil no Google</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec benefits" id="produto">
+    <div class="wrap product">
+      <div>
+        <span class="eyebrow">A plaquinha</span>
+        <h2 style="font-size:var(--step-3);font-weight:800;margin-top:12px">Feita para a sua empresa</h2>
+        <ul class="spec">
+          <li><svg><use href="#i-check"/></svg><div><b>Chip NFC</b><span>O cliente só aproxima o celular. O chip não usa bateria nem tomada.</span></div></li>
+          <li><svg><use href="#i-check"/></svg><div><b>QR Code de reserva</b><span>Para quem tem celular sem NFC, a câmera resolve.</span></div></li>
+          <li><svg><use href="#i-check"/></svg><div><b>Configurada com o seu link</b><span>Leva direto para a avaliação do perfil da sua empresa no Google.</span></div></li>
+          <li><svg><use href="#i-check"/></svg><div><b>Personalizada</b><span>Peça a sua e combine os detalhes pelo WhatsApp.</span></div></li>
+        </ul>
+      </div>
+      <div class="medal" role="img" aria-label="Selo Conecta Leme NFC com cinco estrelas">
+        <div class="medal-in">
+          <svg><use href="#i-logo"/></svg>
+          <span class="medal-name">Conecta Leme</span>
+          <span class="medal-sub">NFC</span>
+          <span class="medal-stars" aria-hidden="true">★★★★★</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="duvidas">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Dúvidas frequentes</span>
+        <h2>Antes de pedir a sua</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>O cliente precisa baixar algum aplicativo?</summary>
+          <p>Não. A maioria dos celulares atuais lê NFC sozinha: é só aproximar com a tela desbloqueada. Se o celular não tiver NFC, o QR Code abre a mesma página pela câmera.</p>
+        </details>
+        <details>
+          <summary>Funciona em iPhone e Android?</summary>
+          <p>Sim. Os iPhones mais recentes e os Androids com NFC leem a plaquinha. Em qualquer aparelho com câmera, o QR Code funciona como alternativa.</p>
+        </details>
+        <details>
+          <summary>A plaquinha precisa de bateria ou internet?</summary>
+          <p>A plaquinha não precisa de bateria nem de tomada. Quem precisa de internet é o celular do cliente, para abrir a página de avaliação.</p>
+        </details>
+        <details>
+          <summary>O que eu preciso ter para usar?</summary>
+          <p>Um perfil da sua empresa no Google (Perfil da Empresa / Google Meu Negócio). A plaquinha é configurada com o link de avaliação desse perfil.</p>
+        </details>
+        <details>
+          <summary>Como faço o pedido?</summary>
+          <p>Chame a Conecta Leme no WhatsApp ou no direct do Instagram. Lá você combina a personalização, o valor e a entrega.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contato">
+    <div class="wrap">
+      <div class="cta-copy">
+        <span class="eyebrow" style="color:var(--gold-bright)">Peça a sua</span>
+        <h2>Conecte seu negócio <span>ao próximo nível.</span></h2>
+        <p>Sua empresa merece ser encontrada, lembrada e bem avaliada. Fale com a gente e garanta sua plaquinha NFC personalizada.</p>
+      </div>
+      <div class="contact">
+        <div class="contact-row">
+          <small>WhatsApp</small>
+          <div class="contact-num">
+            <output id="num">(19) 99254-5031</output>
+            <button class="copy" type="button" id="copy">Copiar número</button>
+          </div>
+        </div>
+        <div class="contact-row">
+          <small>Instagram</small>
+          <a class="ig" href="https://www.instagram.com/conectalemeplacasnfc/" target="_blank" rel="noopener">@conectalemeplacasnfc</a>
+        </div>
+        <a class="btn btn-wa" href="https://wa.me/5519992545031?text=Ol%C3%A1%2C%20quero%20comprar%20minha%20plaquinha%20NFC%20(Conecta%20Leme)" target="_blank" rel="noopener">
+          <svg><use href="#i-wa"/></svg>Quero minha plaquinha NFC
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Conecta Leme NFC</b> · Aproximou. Avaliou. Conectou.</span>
+    <span>Leme – SP · <span id="year">2026</span></span>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/5519992545031?text=Ol%C3%A1%2C%20quero%20comprar%20minha%20plaquinha%20NFC%20(Conecta%20Leme)" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg><use href="#i-wa"/></svg>
+</a>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var stars=document.getElementById('stars');
+  var timer;
+  function tap(){
+    clearTimeout(timer);
+    stage.classList.remove('tap');stars.classList.remove('on');
+    void stage.offsetWidth;
+    stage.classList.add('tap');
+    timer=setTimeout(function(){stars.classList.add('on');},900);
+  }
+  document.getElementById('plaque').addEventListener('click',tap);
+  document.getElementById('replay').addEventListener('click',tap);
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){stage.classList.add('tap');stars.classList.add('on');}
+  else{setTimeout(tap,900);}
+
+  var btn=document.getElementById('copy');
+  btn.addEventListener('click',function(){
+    var done=function(){btn.textContent='Copiado';setTimeout(function(){btn.textContent='Copiar número';},1800);};
+    var sel=function(){var r=document.createRange();r.selectNodeContents(document.getElementById('num'));var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selecionado';};
+    try{navigator.clipboard.writeText('+55 19 99254-5031').then(done,sel);}catch(e){sel();}
+  });
+  document.getElementById('year').textContent=new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
