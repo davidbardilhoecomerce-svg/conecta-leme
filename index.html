@@ -136,6 +136,12 @@ p{margin:0}
 
 .phone{position:absolute;right:2%;bottom:2%;width:42%;aspect-ratio:9/18.5;border-radius:16%/8%;background:#0B0F1C;padding:3.2%;
   box-shadow:0 30px 50px -20px rgba(0,0,0,.7),inset 0 0 0 1.5px rgba(255,255,255,.18);transform:rotate(8deg);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.phone-enter{position:absolute;inset:0;pointer-events:none;transform-origin:80% 70%;animation:enter 1.2s cubic-bezier(.2,.8,.2,1) .2s both}
+@keyframes enter{from{transform:translate(38%,-48%) rotate(14deg);opacity:0}to{transform:none;opacity:1}}
+.toast{position:absolute;left:0;bottom:3%;z-index:3;display:flex;flex-direction:column;gap:2px;background:var(--pl-white);color:var(--pl-ink);border-radius:14px;padding:10px 14px;font-weight:700;font-size:clamp(.72rem,2.4vw,.9rem);line-height:1.25;box-shadow:0 18px 36px -12px rgba(0,0,0,.55);opacity:0;transform:translateY(8px) scale(.6);transform-origin:20% 100%;transition:opacity .25s ease,transform .5s cubic-bezier(.2,1.4,.4,1)}
+.toast span{color:#F6B93B;letter-spacing:.14em;font-size:1.05em}
+.toast small{font-weight:500;color:#5F6368;font-size:.82em}
+.stage.done .toast{opacity:1;transform:none}
 .phone-screen{width:100%;height:100%;border-radius:12%/6%;background:#fff;overflow:hidden;display:flex;flex-direction:column;color:#202124;font-size:clamp(.5rem,1.6vw,.68rem)}
 .ps-bar{background:#F1F3F4;padding:12% 8% 6%;display:flex;align-items:center;gap:6%;font-weight:700}
 .ps-bar i{width:14%;aspect-ratio:1;border-radius:50%;background:var(--pl-blue);display:block}
@@ -160,7 +166,7 @@ p{margin:0}
 @keyframes ping{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.4)}}
 .stage-hint{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);font-size:var(--step--1);color:var(--on-navy-muted);white-space:nowrap;display:flex;gap:8px;align-items:center}
 .stage-hint button{font:inherit;font-weight:700;color:var(--navy);background:var(--gold-bright);border:0;border-radius:999px;padding:.45em .95em;cursor:pointer}
-@media (prefers-reduced-motion: reduce){.phone{transition:none}.stage.tap .waves span{animation:none}}
+@media (prefers-reduced-motion: reduce){.phone,.toast{transition:none}.phone-enter{animation:none}.stage.tap .waves span{animation:none}}
 
 /* Faixa de garantias */
 .strip{background:var(--surface);border-bottom:1px solid var(--line)}
@@ -344,7 +350,8 @@ footer b{color:var(--on-navy);font-family:var(--f-display)}
 
           <div class="waves" aria-hidden="true"><span></span><span></span><span></span></div>
 
-          <div class="phone" aria-hidden="true">
+          <div class="phone-enter" aria-hidden="true">
+          <div class="phone">
             <div class="phone-screen">
               <div class="ps-bar"><i></i>Sua Empresa</div>
               <div class="ps-body">
@@ -358,6 +365,9 @@ footer b{color:var(--on-navy);font-family:var(--f-display)}
               </div>
             </div>
           </div>
+          </div>
+
+          <div class="toast" role="status"><span aria-hidden="true">★★★★★</span>Avaliação enviada<small>agora mesmo</small></div>
         </div>
         <div class="stage-hint"><button type="button" id="replay">Simular o toque</button></div>
       </div>
@@ -541,19 +551,20 @@ footer b{color:var(--on-navy);font-family:var(--f-display)}
 (function(){
   var stage=document.getElementById('stage');
   var stars=document.getElementById('stars');
-  var timer;
+  var timer,timer2;
   function tap(){
-    clearTimeout(timer);
-    stage.classList.remove('tap');stars.classList.remove('on');
+    clearTimeout(timer);clearTimeout(timer2);
+    stage.classList.remove('tap','done');stars.classList.remove('on');
     void stage.offsetWidth;
     stage.classList.add('tap');
     timer=setTimeout(function(){stars.classList.add('on');},900);
+    timer2=setTimeout(function(){stage.classList.add('done');},2000);
   }
   document.getElementById('plaque').addEventListener('click',tap);
   document.getElementById('replay').addEventListener('click',tap);
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce){stage.classList.add('tap');stars.classList.add('on');}
-  else{setTimeout(tap,900);}
+  if(reduce){stage.classList.add('tap','done');stars.classList.add('on');}
+  else{setTimeout(tap,1500);}
 
   var btn=document.getElementById('copy');
   btn.addEventListener('click',function(){
